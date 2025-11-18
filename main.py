@@ -4,7 +4,6 @@ from services.email_service import send_email
 def main():
     print("System Monitor Started")
 
-
     # Example usage of send_email function
     success = send_email(
         to_address="sumon.bd969@gmail.com",
