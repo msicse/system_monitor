@@ -1,38 +1,38 @@
 from datetime import datetime
-import os
 import mss, mss.tools
-import socket
+import logging
 
 from config.settings import SCREENSHOT_DIR
+from utils.paths_utils import get_screenshot_dir, ensure_dir
+from utils.time_utils import timestamp
 
-
-
-
+logger = logging.getLogger(__name__)
 
 
 def take_screenshot():
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    today_date = datetime.now().strftime("%Y%m%d")
-    screenshots = []
-    hostname = socket.gethostname()
-    target_dir = os.path.join(SCREENSHOT_DIR, hostname, today_date)
-    
-    os.makedirs(target_dir, exist_ok=True)
+    # Build target directory using utils
+    target_dir = get_screenshot_dir(SCREENSHOT_DIR)
+    ensure_dir(target_dir)
+
+    saved_files = []
 
     try:
         with mss.mss() as sct:
             for idx, monitor in enumerate(sct.monitors[1:], start=1):
+
+                # Generate filename
+                filename = f"screenshot_{timestamp()}_{idx}.png"
+                file_path = target_dir / filename
+
+                # Capture
                 screenshot = sct.grab(monitor)
-                file_path = os.path.join(target_dir, f"screenshot_{timestamp}_{idx}.png")
-                mss.tools.to_png(screenshot.rgb, screenshot.size, output=file_path)
-                screenshots.append(file_path)
-        return screenshots
+
+                # Save file
+                mss.tools.to_png(screenshot.rgb, screenshot.size, output=str(file_path))
+                saved_files.append(str(file_path))
+
+        return saved_files
+
     except Exception as e:
-        print(f"Error taking screenshot: {e}")
+        logger.exception("Screenshot failed: %s", e)
         return []
-    
-
-    safe_hostname = re.sub(r"[^A-Za-z0-9._-]", "_", hostname)
-
-
-
