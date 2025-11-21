@@ -144,7 +144,7 @@ class TestTakeScreenshot:
             mock_mss.return_value.__enter__.return_value = mock_sct
             
             with patch('services.screenshot_service.mss.tools.to_png'):
-                with patch('services.screenshot_service.socket.gethostname', return_value='TEST-PC'):
+                with patch('utils.paths_utils.socket.gethostname', return_value='TEST-PC'):
                     result = take_screenshot()
                     
                     # Verify hostname is in path

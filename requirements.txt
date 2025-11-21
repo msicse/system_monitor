@@ -1,5 +1,6 @@
 mss==10.1.0
 python-dotenv==1.2.1
+requests==2.32.3
 
 # Testing dependencies
 pytest==8.3.4

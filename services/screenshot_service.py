@@ -3,7 +3,7 @@ import mss, mss.tools
 import logging
 
 from config.settings import SCREENSHOT_DIR
-from utils.paths_utils import get_screenshot_dir, ensure_dir
+from utils.paths_utils import get_screenshots_dir, ensure_dir
 from utils.time_utils import timestamp
 
 logger = logging.getLogger(__name__)
@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 def take_screenshot():
     # Build target directory using utils
-    target_dir = get_screenshot_dir(SCREENSHOT_DIR)
+    target_dir = get_screenshots_dir(SCREENSHOT_DIR)
     ensure_dir(target_dir)
 
     saved_files = []

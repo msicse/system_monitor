@@ -56,6 +56,15 @@ def main():
     # logger.info(f"Installed software list saved with {len(software_list)} entries")
     # print(f"✓ Installed software list saved with {len(software_list)} entries")
 
+    software_list = installed_software_service.list_installed_software()
+    saved_file = installed_software_service.save_software_list_to_file(software_list)
+    if saved_file:
+        logger.info(f"Installed software list saved to {saved_file}")
+        print(f"✓ Installed software list saved to {saved_file}")
+    else:
+        logger.error("Failed to save installed software list")
+        print("✗ Failed to save installed software list")
+
 
 
 if __name__ == "__main__":
