@@ -1,2 +1,7 @@
 mss==10.1.0
 python-dotenv==1.2.1
+
+# Testing dependencies
+pytest==8.3.4
+pytest-mock==3.14.0
+pytest-cov==6.0.0

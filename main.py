@@ -51,10 +51,10 @@ def main():
     #     logger.error("Failed to take screenshot")
     #     print("✗ Failed to take screenshot")
 
-    software_list = installed_software_service.list_installed_software()
-    installed_software_service.save_software_list_to_file(software_list)
-    logger.info(f"Installed software list saved with {len(software_list)} entries")
-    print(f"✓ Installed software list saved with {len(software_list)} entries")
+    # software_list = installed_software_service.list_installed_software()
+    # installed_software_service.save_software_list_to_file(software_list)
+    # logger.info(f"Installed software list saved with {len(software_list)} entries")
+    # print(f"✓ Installed software list saved with {len(software_list)} entries")
 
 
 
